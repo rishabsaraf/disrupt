@@ -36,12 +36,22 @@ class AccountBackend(ModelBackend):
 
 
 def social_user(backend, uid, user=None, *args, **kwargs):
+    """
+    This backend overrides the psa's default social user in order to not associate the logged in user with another
+    random email.
+    :param backend: the authentication backend
+    :param uid: the user id.
+    :param user: the user.
+    :param args: args.
+    :param kwargs: keyword args.
+    :return: a dictionary with keys social, user, is_new and new_association.
+    """
     provider = backend.name
     social = backend.strategy.storage.user.get_social_auth(provider, uid)
     if social:
         if user and social.user != user:
             logout(backend.strategy.request)
-            user = None
+            # TODO: this is not working when you try to login when another account is already signed in.
         elif not user:
             user = social.user
     else:
