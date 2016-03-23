@@ -54,9 +54,3 @@ def social_user(backend, uid, user=None, *args, **kwargs):
             'new_association': False}
 
 
-def redirect_if_no_refresh_token(backend, response, social, *args, **kwargs):
-    import pdb
-    pdb.set_trace()
-    if backend.name == 'google-oauth2' and social and response.get('refresh_token') is None and social.extra_data.get(
-            'refresh_token') is None:
-        return redirect('/login/google-oauth2?approval_prompt=force')

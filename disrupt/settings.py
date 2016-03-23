@@ -123,7 +123,7 @@ STATICFILES_DIRS = [
 # Settings for python social auth
 
 AUTHENTICATION_BACKENDS = (
-    'social.backends.google.GoogleOAuth2',
+    'social.backends.google.GooglePlusAuth',
     'account.backends.AccountBackend',  # This is the custom backend used to perform username/email based login
 )
 
@@ -135,8 +135,8 @@ SOCIAL_AUTH_RAISE_EXCEPTIONS = True
 RAISE_EXCEPTIONS = True
 
 # The key and secret for disrupt from google developers console
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '183952226997-epbob5985aqd1ortpd58t182k761rr2i.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'VbtV-ckWFb-jXdAucTqcmi2s'
+SOCIAL_AUTH_GOOGLE_PLUS_KEY = '183952226997-drcpjdcv0ihfg23nev47o5ve94j9b16a.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_PLUS_SECRET = 'Dql1meXBmBlScZCjt1rbhmJR'
 
 AUTH_USER_MODEL = 'account.Account'
 LOGIN_URL = '/login/'
@@ -148,7 +148,6 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.auth_allowed',
     # 'social.pipeline.social_auth.social_user',
     'account.backends.social_user',
-    'account.backends.redirect_if_no_refresh_token',
     'social.pipeline.user.get_username',
     'social.pipeline.social_auth.associate_by_email',  # Associates all the accounts associated with an email address.
     'social.pipeline.user.create_user',
@@ -157,7 +156,3 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.user.user_details',
 )
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS = {
-    'access_type': 'online',  # Enables the refreshing grant
-    # 'approval_prompt': 'force'  # Enables refresh_token, for ever and ever
-}

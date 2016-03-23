@@ -1,35 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Disrupt</title>
-	{% load staticfiles %}
-	<link rel="stylesheet" type="text/css" href="{%static 'main.css' %}" />
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <title>Disrupt</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{%static 'main.css' %}"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/api:client.js"></script>
+
+    <script type="text/javascript">
+        gapi.load('auth2', function () {
+            var auth2;
+
+            auth2 = gapi.auth2.init({
+                client_id: "183952226997-drcpjdcv0ihfg23nev47o5ve94j9b16a.apps.googleusercontent.com",
+                scope: "https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.me"
+            });
+
+            auth2.then(function () {
+                var button = document.getElementById("google");
+                console.log("User is signed-in in Google+ platform?", auth2.isSignedIn.get() ? "Yes" : "No");
+
+                auth2.attachClickHandler(button, {}, function (googleUser) {
+                    // Send access-token to backend to finish the authenticate
+                    // with your application
+
+                    var authResponse = googleUser.getAuthResponse();
+                    var $form;
+                    var $input;
+
+                    $form = $("<form>");
+                    $form.attr("action", "/complete/google-plus/");
+                    $form.attr("method", "post");
+                    $input = $("<input>");
+                    $input.attr("name", "access_token");
+                    $input.attr("value", authResponse.access_token);
+                    $form.append($input);
+                    // Add csrf-token if needed
+                    $(document.body).append($form);
+                    $form.submit();
+                });
+            });
+        });
+    </script>
 </head>
 <body>
-	<div class="mainDiv">
-		<div class="row">
-			<div class = "column" id="disrupt">
-				<h1>DISRUPT</h1>
-			</div>
-			<div class="column" id="links">
-				<div id="loginBox">
-					<h2>Login</h2>
-					<a href="{% url 'social:begin' 'google-oauth2' %}">
-						<div class="loginButton" id="google">
-							Sign in with <emphasis>google</emphasis>
-						</div>
-					</a>
-					<a href="">
-						<div class="loginButton" id="facebook">
-							Sign in with facebook
-						</div>
-					</a>
-				</div>
-			</div>
-			<div class="clear"></div>
-		</div>
-	</div>
+<div class="mainDiv">
+    <div class="row">
+        <div class="column" id="disrupt">
+            <h1>DISRUPT</h1>
+        </div>
+        <div class="column" id="links">
+            <div id="loginBox">
+                <h2>Login</h2>
+                <!--<a href="{% url 'social:begin' 'google-oauth2' %}">-->
+                    <div class="loginButton" id="google">
+                        Sign in with
+                        <emphasis>google</emphasis>
+                    </div>
+                <!--</a>-->
+                <a href="">
+                    <div class="loginButton" id="facebook">
+                        Sign in with facebook
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
 </body>
 </html>
