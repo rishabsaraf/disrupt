@@ -1,0 +1,76 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300);
+
+* {
+	padding: 0px;
+	margin: 0px;
+	font-family: Open Sans;
+}
+
+body {
+	background-color: #FAFAFA;
+	margin: 0px;
+	padding: 0px;
+}
+
+.mainDiv {
+	padding: 40px;
+	margin-top: 5%;
+}
+
+.row {
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	min-width: 200px;
+}
+
+.column {
+	min-width: 240px;
+	width: 50%;
+	float: left;
+	text-align: center;
+	height: 100%;
+}
+
+#links {
+	background-color: #FFF;
+	box-shadow: 0px 0px 50px #edeeee;
+
+}
+
+#disrupt {
+	line-height: 9.2;
+}
+
+a {
+	text-decoration: none;
+}
+
+#loginBox {
+	min-width: 200px;
+	padding: 60px 20px;
+}
+
+.loginButton {
+	background-color: #000;
+	height: 40px;
+	line-height: 40px;
+	width: 200px;
+	color: #FFF;
+	vertical-align: middle;
+	text-align: center;
+	border-radius: 10px;
+	margin: 20px auto;
+}
+
+#google {
+	background-color: red;
+}
+
+#facebook {
+	background-color: blue;
+}
+
+.clear {
+	clear: both;
+}

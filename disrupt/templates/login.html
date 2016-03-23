@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Disrupt</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{%static 'main.css' %}" />
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+</head>
+<body>
+	<div class="mainDiv">
+		<div class="row">
+			<div class = "column" id="disrupt">
+				<h1>DISRUPT</h1>
+			</div>
+			<div class="column" id="links">
+				<div id="loginBox">
+					<h2>Login</h2>
+					<a href="{% url 'social:begin' 'google-oauth2' %}">
+						<div class="loginButton" id="google">
+							Sign in with <emphasis>google</emphasis>
+						</div>
+					</a>
+					<a href="">
+						<div class="loginButton" id="facebook">
+							Sign in with facebook
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</body>
+</html>
